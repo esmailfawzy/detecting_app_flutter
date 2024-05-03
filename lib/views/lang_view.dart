@@ -19,7 +19,6 @@ class LangView extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the second screen when Button 1 is pressed
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -30,10 +29,9 @@ class LangView extends StatelessWidget {
                 },
                 child: Text('Arabic'),
               ),
-              SizedBox(height: 20), // Space between buttons
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the second screen when Button 2 is pressed
                   Navigator.push(
                     context,
                     MaterialPageRoute(

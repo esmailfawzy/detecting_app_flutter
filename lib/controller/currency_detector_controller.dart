@@ -8,8 +8,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 FlutterTts flutterTts = FlutterTts();
 
-class ScanController extends GetxController {
-  ScanController({required this.chosenLanguage});
+class CurrencyController extends GetxController {
+  CurrencyController({required this.chosenLanguage});
 
   @override
   void onInit() {
@@ -29,7 +29,7 @@ class ScanController extends GetxController {
   }
 
   String chosenLanguage = "en-US";
-  String chosenModel = "object";
+  String chosenModel = "currency";
 
   late CameraController cameraController;
   late List<CameraDescription> cameras;
