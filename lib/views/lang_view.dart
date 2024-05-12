@@ -5,11 +5,14 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LangView extends StatelessWidget {
-  // final ttsController = TTSController();
+  // const LangView({super.key});
+
+  final ttsController = TTSController();
 
   // CustomButton({Key key, this.buttonType}) : super(key: key);
-
-  const LangView({super.key});
+  LangView() {
+    ttsController.testTTS("Choose Language: Arabic, or English.", "en-US");
+  }
 
   @override
   Widget build(BuildContext context) {
