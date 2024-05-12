@@ -29,7 +29,7 @@ class LangView extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        controller.testTTS("Hello", "en-US");
+                        // controller.testTTS("مرحبا", "ar");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -43,6 +43,7 @@ class LangView extends StatelessWidget {
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
+                        // controller.testTTS("Hello", "en-US");
                         Navigator.push(
                           context,
                           MaterialPageRoute(

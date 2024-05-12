@@ -49,7 +49,7 @@ class TTSController extends GetxController {
 
     // await flutterTts.areLanguagesInstalled(["en-AU", "en-US"]);
 
-    await flutterTts.setQueueMode(1);
+    // await flutterTts.setQueueMode(1);
 
     // await flutterTts.getMaxSpeechInputLength;
   }

@@ -2,11 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:detect_tflite/controller/tts_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-FlutterTts flutterTts = FlutterTts();
 
 class ScanController extends GetxController {
   ScanController({required this.chosenLanguage});
@@ -34,6 +31,8 @@ class ScanController extends GetxController {
   late CameraController cameraController;
   late List<CameraDescription> cameras;
 
+  final ttsController = TTSController();
+
   var isCameraInitialized = false;
   var cameraCount = 0;
 
@@ -41,7 +40,7 @@ class ScanController extends GetxController {
   var label = "Default Label";
 
   initCamera() async {
-    this.testTTS("Detecting", "en-US");
+    // this.ttsController.testTTS("Detecting", "en-US");
     if (await Permission.camera.request().isGranted) {
       cameras = await availableCameras();
 
@@ -80,50 +79,6 @@ class ScanController extends GetxController {
     print("init tflite");
   }
 
-  testTTS(String speakText, String lang) async {
-    List<dynamic> languages = await flutterTts.getLanguages;
-
-    print(languages);
-
-    await flutterTts.setLanguage(lang);
-
-    await flutterTts.setSpeechRate(0.3);
-
-    await flutterTts.setVolume(1.0);
-
-    // await flutterTts.setPitch(1.0);
-
-    await flutterTts.speak(speakText);
-    // await flutterTts.isLanguageAvailable("en-US");
-
-    // // iOS, Android and Web only
-    // //see the "Pausing on Android" section for more info
-    // await flutterTts.pause();
-
-    // // iOS, macOS, and Android only
-    // // await flutterTts.synthesizeToFile("Hello World", Platform.isAndroid ? "tts.wav" : "tts.caf");
-    // await flutterTts.synthesizeToFile("Hello World", "tts.wav");
-
-    // await flutterTts.setVoice({"name": "Karen", "locale": "en-AU"});
-
-    // // iOS only
-    // await flutterTts.setSharedInstance(true);
-
-    // // Android only
-    // await flutterTts.setSilence(2);
-
-    // await flutterTts.getEngines;
-
-    // await flutterTts.getDefaultVoice;
-
-    // await flutterTts.isLanguageInstalled("en-AU");
-
-    // await flutterTts.areLanguagesInstalled(["en-AU", "en-US"]);
-
-    await flutterTts.setQueueMode(1);
-    // await flutterTts.getMaxSpeechInputLength;
-  }
-
   objectDetector(CameraImage image) async {
     print("this.chosenLanguage: $chosenLanguage");
     var detector = await Tflite.runModelOnFrame(
@@ -151,7 +106,9 @@ class ScanController extends GetxController {
         // y = ourDetectedObject['rect']['y'];
       }
       print(ourDetectedObject);
-      this.testTTS(ourDetectedObject['label'].toString(), this.chosenLanguage);
+      this
+          .ttsController
+          .testTTS(ourDetectedObject['label'].toString(), this.chosenLanguage);
       // await Tflite.close();
       update();
     }
